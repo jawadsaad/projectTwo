@@ -1,0 +1,157 @@
+﻿@model IEnumerable<ShockingMomentsInSports.Models.Moment>
+
+@{
+    ViewBag.Title = "Database";
+}
+
+<style>
+    th {
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .readMore {
+        color: #428bca;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+    }
+</style>
+
+<h2>Database</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm())
+    {
+    <p>
+        Sport: @Html.DropDownList("sport", "All")
+        League/Category: @Html.DropDownList("category", "All")
+        Title: @Html.TextBox("searchQry")
+        <input type="submit" value="Filter" />
+    </p>
+    }
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sport)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeagueOrCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Event)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YouTubeVideo)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="vertical-align:middle;" class="title">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td style="vertical-align:middle;">
+                    @Html.DisplayFor(modelItem => item.Sport)
+                </td>
+                <td style="vertical-align:middle;">
+                    @Html.DisplayFor(modelItem => item.LeagueOrCategory)
+                </td>
+                <td style="vertical-align:middle;">
+                    @Html.DisplayFor(modelItem => item.Event)
+                </td>
+                <td style="vertical-align:middle;">
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td style="vertical-align:middle;" class="description">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td style="vertical-align:middle;">
+                    <iframe width="336" height="189" src="https://www.youtube.com/embed/@Html.DisplayFor(modelItem => item.YouTubeVideo)" frameborder="0" allowfullscreen></iframe>
+                </td>
+                <td style="vertical-align:middle;">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div id="readMoreModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="modalHeader">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="modalText"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        var descArr = document.getElementsByClassName('description');
+        var titleArr = document.getElementsByClassName('title');
+        var readMoreArr = [];
+        var modalTitleArr = [];
+
+        for (var i = 0; i < descArr.length; i++) {
+            if (descArr[i].innerHTML.length > 250) {
+                readMoreArr.push(descArr[i].innerText);
+                modalTitleArr.push(titleArr[i].innerText);
+                descArr[i].innerHTML = descArr[i].innerHTML.substring(0, 250) + "..." + '<span class="readMore">Read more</span>';
+            }
+        }
+
+        var readMore = document.getElementsByClassName('readMore');
+
+        function addListener(i) {
+            readMore[i].addEventListener("click", function () { displayDescription(i) }, false);
+        }
+
+        for (var i = 0; i < readMore.length; i++) {
+            addListener(i);
+        }
+
+        function displayDescription(i) {
+            var title = document.getElementById('modalHeader');
+            var description = document.getElementById('modalText');
+
+            title.innerText = modalTitleArr[i];
+            description.innerText = readMoreArr[i];
+
+            $('#readMoreModal').modal({
+                show: 'true'
+            });
+        }
+
+    </script>

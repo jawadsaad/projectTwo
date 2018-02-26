@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ShockingSportsMomentsModelStoreContainer" CdmEntityContainer="ShockingSportsMomentsEntities">
+    <EntitySetMapping Name="Moments">
+      <EntityTypeMapping TypeName="ShockingSportsMomentsModel.Moment">
+        <MappingFragment StoreEntitySet="Moment">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Sport" ColumnName="Sport" />
+          <ScalarProperty Name="LeagueOrCategory" ColumnName="LeagueOrCategory" />
+          <ScalarProperty Name="Event" ColumnName="Event" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="YouTubeVideo" ColumnName="YouTubeVideo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

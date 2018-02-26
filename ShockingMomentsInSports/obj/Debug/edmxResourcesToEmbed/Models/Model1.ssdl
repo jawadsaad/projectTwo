@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShockingSportsMomentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Moment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar(max)" Nullable="false" />
+    <Property Name="Sport" Type="varchar(max)" Nullable="false" />
+    <Property Name="LeagueOrCategory" Type="varchar(max)" Nullable="false" />
+    <Property Name="Event" Type="varchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" Nullable="false" />
+    <Property Name="YouTubeVideo" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ShockingSportsMomentsModelStoreContainer">
+    <EntitySet Name="Moment" EntityType="Self.Moment" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
